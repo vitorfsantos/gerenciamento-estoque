@@ -30,7 +30,16 @@
               <option value="<?= $color['id'] ?>"><?php echo $color['color'] ?></option>
             <?php } ?>
           </select>
-          <button class="btn btn-primary">+</button>
+          <button type="button" onclick="showNewColorForm()" class="btn btn-primary">+</button>
+        </div>
+        <div class="d-none" id="newColorDiv">
+          <form id="newTypeForm">
+            <div class="d-flex g-2">
+              <label for="newColor">Nova Cor:</label>
+              <input type="text" name="newColor" id="newColor" class="">
+              <button type="button" onclick="createColor()">Cadastrar Cor</button>
+            </div>
+          </form>
         </div>
       </div>
       <div class="form-group">
@@ -52,6 +61,11 @@
     div.classList.remove('d-none')
   }
 
+  function showNewColorForm() {
+    div = document.getElementById('newColorDiv')
+    div.classList.remove('d-none')
+  }
+
   function createType() {
     newType = document.getElementById('newType').value;
     // console.log(newType)
@@ -62,13 +76,43 @@
         type: newType,
       },
       success: function(response) {
-        // Faça algo com a resposta do servidor, se necessário
-        console.log('sucesso');
+        console.log(response);
         div = document.getElementById('newTypeDiv')
         div.classList.add('d-none')
         showSucess();
       }
     });
+  }
+
+  function createColor() {
+    newColor = document.getElementById('newColor').value;
+
+    $.ajax({
+      type: "POST",
+      url: "../actions/ColorsAction.php",
+      data: {
+        color: newColor,
+      },
+      success: function(response) {
+        var data = JSON.parse(response);
+        console.log(data);
+        updateSelect(data, 'color')
+
+        div = document.getElementById('newColorDiv')
+        div.classList.add('d-none')
+        showSucess();
+      }
+    });
+  }
+
+  function updateSelect(newOption, selectId) {
+    select = document.getElementById(selectId)
+
+
+    var newOptionSelect = document.createElement("option");
+    newOptionSelect.value = newOption['id']; // Define o valor da opção como a chave do primeiro elemento do objeto
+    newOptionSelect.text = newOption['color']; // Define o texto da opção como o valor do primeiro elemento do objeto
+    select.add(newOptionSelect);
   }
 
   function showSucess() {
