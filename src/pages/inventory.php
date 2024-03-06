@@ -1,3 +1,15 @@
+<?php
+require_once '../../config.php';
+require_once '../actions/Type/GetTypeAction.php';
+require_once '../actions/Colors/GetColorAction.php';
+
+
+$types = GetTypeAction($conn);
+$colors = GetColorAction($conn);
+// var_dump($types);
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,13 +44,12 @@
     </table>
   </main>
 
-  <!-- create item -->
   <!-- Modal -->
   <div class="modal fade" id="newItemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <div class="modal-header d-flex justify-content-between px-3">
+          <h5 class="modal-title" id="exampleModalLongTitle">Cadastrar novo produto</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
