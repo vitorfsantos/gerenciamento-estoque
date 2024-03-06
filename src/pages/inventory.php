@@ -1,11 +1,11 @@
 <?php
 require_once '../../config.php';
-require_once '../actions/Type/GetTypeAction.php';
-require_once '../actions/Colors/GetColorAction.php';
+require_once '../actions/ColorsAction.php';
+require_once '../actions/TypesAction.php';
 
 
-$types = GetTypeAction($conn);
-$colors = GetColorAction($conn);
+$types = GetTypesAction($conn);
+$colors = GetColorsAction($conn);
 // var_dump($types);
 ?>
 
@@ -21,8 +21,10 @@ $colors = GetColorAction($conn);
   <!-- Outros meta tags e links podem estar presentes aqui -->
   <link rel="stylesheet" href="../../css/main.css">
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body class="d-flex flex-column align-items-center">
@@ -55,7 +57,7 @@ $colors = GetColorAction($conn);
           </button>
         </div>
         <div class="modal-body">
-        <?php require_once './templates/inventoryModal.php'; ?>
+          <?php require_once './templates/inventoryModal.php'; ?>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -65,7 +67,7 @@ $colors = GetColorAction($conn);
     </div>
   </div>
 
-  
+
   <?php require_once './templates/footer.php'; ?>
 </body>
 
