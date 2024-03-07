@@ -5,7 +5,7 @@
       <div class="form-group">
         <label>Tipo</label>
         <div class="d-flex">
-          <select name="color" id="color" class="form-control">
+          <select name="type" id="type" class="form-control">
             <?php foreach ($types as $type) { ?>
               <option value="<?= $type['id'] ?>"><?php echo $type['type_name'] ?></option>
             <?php } ?>
@@ -107,7 +107,7 @@
 
   function updateSelect(newOption, selectId) {
     select = document.getElementById(selectId)
-
+    console.log(select)
 
     var newOptionSelect = document.createElement("option");
     newOptionSelect.value = newOption['id']; // Define o valor da opção como a chave do primeiro elemento do objeto
