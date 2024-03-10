@@ -2,9 +2,13 @@
 
 require_once '../database/Types.php';
 require_once '../../config.php';
-// Verificar se foi enviado um valor via POST
-if (isset($_POST['type'])) {
-  return store($conn, $_POST['type']);
+
+if (isset($_POST['action']) && !empty($_POST['action'])) {
+  $action = $_POST['action'];
+  switch ($action) {
+    case 'storeTypeAction':
+      return storeTypeAction($conn);
+  }
 }
 
 function GetTypesAction($conn)
@@ -12,7 +16,8 @@ function GetTypesAction($conn)
   return getClothingType($conn);
 }
 
-function store($conn, $type)
+function storeTypeAction($conn)
 {
-  return storeType($conn, $type);
+  $salvar = storeType($conn, $_POST['type']);
+  echo json_encode($salvar);
 }

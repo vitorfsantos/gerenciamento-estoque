@@ -2,6 +2,7 @@
 require_once '../../config.php';
 require_once '../actions/ColorsAction.php';
 require_once '../actions/TypesAction.php';
+require_once '../actions/StockAction.php';
 
 
 $types = GetTypesAction($conn);
@@ -41,7 +42,7 @@ $colors = GetColorsAction($conn);
         <th>Cor</th>
         <th>Estoque</th>
       </thead>
-      <tbody>
+      <tbody id="stockBody">
       </tbody>
     </table>
   </main>
@@ -59,10 +60,7 @@ $colors = GetColorsAction($conn);
         <div class="modal-body">
           <?php require_once './templates/inventoryModal.php'; ?>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
+
       </div>
     </div>
   </div>
@@ -72,10 +70,41 @@ $colors = GetColorsAction($conn);
 </body>
 
 </html>
+<script>
+  window.onload = function() {
+    getStock();
+  };
 
-<head>
+  function getStock() {
+    <?php $clothes = getStockAction($conn); ?>
+    var clothes = <?php echo $clothes; ?>;
+    console.log(clothes)
 
-</head>
+    var tbody = document.getElementById('stockBody');
+
+    // Limpar o tbody antes de adicionar novas linhas
+    tbody.innerHTML = '';
+
+    // Iterar sobre os dados de clothes e adicionar uma linha para cada item
+    clothes.forEach(function(cloth) {
+      var row = tbody.insertRow(); // Criar uma nova linha
+
+      // Adicionar células para cada coluna da tabela
+      var product = row.insertCell(0);
+      var type = row.insertCell(1);
+      var color = row.insertCell(2);
+      var stock = row.insertCell(3);
+      // Adicione mais células conforme necessário
+
+      // Preencher as células com os dados do item
+      type.textContent = cloth.type_id;
+      color.textContent = cloth.color_id;
+      product.textContent = cloth.product;
+      stock.textContent = cloth.stock;
+      // Preencha outras células conforme necessário
+    });
+  }
+</script>
 
 <!-- <body class="d-flex flex-column align-items-center">
   

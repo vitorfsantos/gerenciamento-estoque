@@ -43,10 +43,12 @@ function storeType($conn, $type)
     }
 
     // Fecha a conexão
-    mysqli_stmt_close($stmt);
-    
-    // Retorna verdadeiro se a inserção foi bem-sucedida
-    return true;
+    // mysqli_stmt_close($stmt);
+    return [
+      'id' => $stmt->insert_id,
+      'type' => $type
+    ];
+
 } catch (Exception $e) {
     // Retorna falso se ocorrer algum erro
     echo "Erro: " . $e->getMessage();
