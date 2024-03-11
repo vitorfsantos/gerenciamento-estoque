@@ -46,7 +46,11 @@ function storeStock($conn, $stockItem)
 function getStock($conn){
   $clothes = [];
 
-  $sql = "SELECT * FROM clothes";
+  $sql = "SELECT c.*, co.color AS color_name, t.type_name AS type_name
+  FROM clothes c
+  INNER JOIN colors co ON c.color_id = co.id
+  INNER JOIN clothing_type t ON c.type_id = t.id";
+
   $result = mysqli_query($conn, $sql);
 
   $result_check = mysqli_num_rows($result);
@@ -55,4 +59,14 @@ function getStock($conn){
     $clothes = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
   return $clothes;
+}
+function deleteStock($conn, $id){
+  
+  // $clothes = [];
+
+  $sql = "DELETE FROM clothes WHERE id=$id";
+
+  return mysqli_query($conn, $sql);
+
+ 
 }

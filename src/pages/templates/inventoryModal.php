@@ -13,11 +13,11 @@
           <button type="button" onclick="showNewTypeForm()" class="btn btn-primary">+</button>
         </div>
         <div class="d-none" id="newTypeDiv">
-            <div class="d-flex g-2">
-              <label for="newType">Novo Tipo:</label>
-              <input type="text" name="newType" id="newType" class="">
-              <button type="button" onclick="createType()">Cadastrar tipo</button>
-            </div>
+          <div class="d-flex g-2">
+            <label for="newType">Novo Tipo:</label>
+            <input type="text" name="newType" id="newType" class="">
+            <button type="button" onclick="createType()">Cadastrar tipo</button>
+          </div>
         </div>
       </div>
       <div class="form-group">
@@ -31,11 +31,11 @@
           <button type="button" onclick="showNewColorForm()" class="btn btn-primary">+</button>
         </div>
         <div class="d-none" id="newColorDiv">
-            <div class="d-flex g-2">
-              <label for="newColor">Nova Cor:</label>
-              <input type="text" name="newColor" id="newColor" class="">
-              <button type="button" onclick="createColor()">Cadastrar Cor</button>
-            </div>
+          <div class="d-flex g-2">
+            <label for="newColor">Nova Cor:</label>
+            <input type="text" name="newColor" id="newColor" class="">
+            <button type="button" onclick="createColor()">Cadastrar Cor</button>
+          </div>
         </div>
       </div>
       <div class="form-group">
@@ -47,8 +47,8 @@
         <input type="number" name="stock" id="stock" required class="form-control" />
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-        <button type="button"  onclick="createStock()" class="btn btn-primary">Salvar</button>
+        <button type="button" id="closeBtn" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button type="button" onclick="createStock()" class="btn btn-primary">Salvar</button>
       </div>
     </form>
   </div>
@@ -60,22 +60,21 @@
       type: "POST",
       url: "../actions/StockAction.php",
       data: {
-        action : 'storeStock',
+        action: 'storeStock',
         stockItem: {
-          'type_id' : document.getElementById('type').value,
-          'color_id' : document.getElementById('color').value,
-          'product' : document.getElementById('product').value,
-          'stock' : document.getElementById('stock').value,
+          'type_id': document.getElementById('type').value,
+          'color_id': document.getElementById('color').value,
+          'product': document.getElementById('product').value,
+          'stock': document.getElementById('stock').value,
         },
       },
       success: function(response) {
-        getStock()
-        // console.log(data)
-        // updateSelect(data, 'type')
+        document.getElementById('closeBtn').click()
+        showMainSucess()
 
-        // div = document.getElementById('newTypeDiv')
-        // div.classList.add('d-none')
-        // showSucess();
+        setTimeout(function() {
+          location.reload();
+        }, 1000);
       }
     });
   }
@@ -143,6 +142,11 @@
 
   function showSucess() {
     var div = document.getElementById('successDiv');
+    div.classList.remove('d-none');
+  }
+
+  function showMainSucess() {
+    var div = document.getElementById('mainSuccessDiv');
     div.classList.remove('d-none');
   }
 </script>

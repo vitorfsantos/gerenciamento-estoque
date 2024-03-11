@@ -16,6 +16,10 @@ function GetColorsAction($conn)
 {
   return getColor($conn);
 }
+function GetColorById($conn, $id)
+{
+  return getColorById($conn, $id);
+}
 
 function storeColorAction($conn)
 {

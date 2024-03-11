@@ -9,6 +9,10 @@ if (isset($_POST['action']) && !empty($_POST['action'])) {
       return storeStockAction($conn);
     case 'getStock':
       echo getStockAction($conn);
+    case 'deleteStock':
+      return deleteStockAction($conn);
+    // case 'editStock':
+    //   echo getStockAction($conn);
   }
 }
 function storeStockAction($conn){
@@ -16,7 +20,9 @@ function storeStockAction($conn){
 }
 
 function getStockAction($conn){
-  
-  // var_dump(getStock($conn));
   return json_encode(getStock($conn));
+}
+function deleteStockAction($conn){
+  // var_dump($_POST);
+  return deleteStock($conn, $_POST['id']);
 }

@@ -16,6 +16,21 @@ function getColor($conn)
 
   return $colors;
 }
+function getById($conn, $id)
+{
+  $color = [];
+
+  $sql = "SELECT color FROM colors WHERE id = $id";
+  $result = mysqli_query($conn, $sql);
+
+  $result_check = mysqli_num_rows($result);
+
+  if ($result_check > 0)
+    $color = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+
+  return $color;
+}
 
 function storeColor($conn, $color)
 {
