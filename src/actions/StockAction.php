@@ -11,8 +11,8 @@ if (isset($_POST['action']) && !empty($_POST['action'])) {
       echo getStockAction($conn);
     case 'deleteStock':
       return deleteStockAction($conn);
-    // case 'editStock':
-    //   echo getStockAction($conn);
+    case 'updateStock':
+      return updateStockAction($conn);
   }
 }
 function storeStockAction($conn){
@@ -25,4 +25,8 @@ function getStockAction($conn){
 function deleteStockAction($conn){
   // var_dump($_POST);
   return deleteStock($conn, $_POST['id']);
+}
+
+function updateStockAction($conn){
+  return updateStock($conn, $_POST['stockItem']);
 }

@@ -61,12 +61,14 @@ function getStock($conn){
   return $clothes;
 }
 function deleteStock($conn, $id){
-  
-  // $clothes = [];
 
   $sql = "DELETE FROM clothes WHERE id=$id";
 
   return mysqli_query($conn, $sql);
 
  
+}
+
+function updateStock($conn, $stockItem){
+  var_dump('update');
 }

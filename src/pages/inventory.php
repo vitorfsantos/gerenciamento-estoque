@@ -54,22 +54,7 @@ $colors = GetColorsAction($conn);
   </main>
 
   <!-- Modal -->
-  <div class="modal fade" id="newItemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header d-flex justify-content-between px-3">
-          <h5 class="modal-title" id="exampleModalLongTitle">Cadastrar novo produto</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <?php require_once './templates/inventoryModal.php'; ?>
-        </div>
-
-      </div>
-    </div>
-  </div>
+  <?php require_once './templates/inventoryModal.php'; ?>
 
 
   <?php require_once './templates/footer.php'; ?>
@@ -82,10 +67,8 @@ $colors = GetColorsAction($conn);
   };
 
   function getStock() {
-    console.log('getStock')
     <?php $clothes = getStockAction($conn); ?>
     var clothes = <?php echo $clothes; ?>;
-    console.log(clothes)
 
     var tbody = document.getElementById('stockBody');
 
@@ -109,20 +92,11 @@ $colors = GetColorsAction($conn);
 
       var editButton = document.createElement("button");
       editButton.textContent = "Editar";
+      editButton.setAttribute("data-toggle", "modal");
+      editButton.setAttribute("data-target", "#newItemModal");
+
       editButton.addEventListener("click", function() {
-        $.ajax({
-          type: "POST",
-          url: "../actions/StockAction.php",
-          data: {
-            action: 'editStock',
-            stockItem: {
-              'id': cloth.id
-            },
-          },
-          success: function(response) {
-            
-          }
-        });
+        populateCloth(cloth)
       });
 
       var deleteButton = document.createElement("button");
