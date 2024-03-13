@@ -55,9 +55,11 @@ $colors = GetColorsAction($conn);
     </main>
     <?php require_once './templates/footer.php'; ?>
   </div>
-
-
   <?php require_once './templates/inventoryModal.php'; ?>
+
+
+  
+
 
 
 
