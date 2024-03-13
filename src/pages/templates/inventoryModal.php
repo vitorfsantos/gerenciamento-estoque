@@ -1,5 +1,5 @@
-<div class="modal fade" id="newItemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade modal-centralizado" id="newItemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header d-flex justify-content-between px-3">
         <h5 class="modal-title" id="exampleModalLongTitle">Cadastrar novo produto</h5>
@@ -69,6 +69,7 @@
   </div>
 </div>
 
+
 <script>
   function createStock() {
     $.ajax({
@@ -101,7 +102,7 @@
       data: {
         action: 'updateStock',
         stockItem: {
-          'id' : id,
+          'id': id,
           'type_id': document.getElementById('type').value,
           'color_id': document.getElementById('color').value,
           'product': document.getElementById('product').value,
@@ -204,4 +205,12 @@
       updateStock(cloth.id)
     });
   }
+
+  $('#newItemModal').on('show.bs.modal', function(e) {
+    $(this).parent().addClass('d-flex align-items-center justify-content-center');
+  });
+
+  $('#newItemModal').on('hidden.bs.modal', function(e) {
+    $(this).parent().removeClass('d-flex align-items-center justify-content-center');
+  });
 </script>

@@ -28,36 +28,39 @@ $colors = GetColorsAction($conn);
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
-<body class="d-flex flex-column align-items-center">
-  <?php require_once './templates/header.php'; ?>
-  <main class="container d-flex flex-column">
-    <div class="d-flex justify-content-between pb-3">
-      <h4>Gerencie seu estoque aqui.</h4>
-      <div>
-        <button type="button" class="btn btn-dark" onclick="getStock()">Atualizar</button>
-        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#newItemModal">+</button>
+<body>
+  <div class="d-flex flex-column align-items-center">
+    <?php require_once './templates/header.php'; ?>
+    <main class="container d-flex flex-column">
+      <div class="d-flex justify-content-between pb-3">
+        <h4>Gerencie seu estoque aqui.</h4>
+        <div>
+          <button type="button" class="btn btn-dark" onclick="getStock()">Atualizar</button>
+          <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#newItemModal">+</button>
 
+        </div>
       </div>
-    </div>
-    <div id="mainSuccessDiv" class="p-3 mb-2 bg-success text-white d-none">Item cadastrado com sucesso!</div>
-    <table class="table">
-      <thead>
-        <th>Produto</th>
-        <th>Tipo</th>
-        <th>Cor</th>
-        <th>Estoque</th>
-        <th>Ações</th>
-      </thead>
-      <tbody id="stockBody">
-      </tbody>
-    </table>
-  </main>
+      <div id="mainSuccessDiv" class="p-3 mb-2 bg-success text-white d-none">Item cadastrado com sucesso!</div>
+      <table class="table">
+        <thead>
+          <th>Produto</th>
+          <th>Tipo</th>
+          <th>Cor</th>
+          <th>Estoque</th>
+          <th>Ações</th>
+        </thead>
+        <tbody id="stockBody">
+        </tbody>
+      </table>
+    </main>
+    <?php require_once './templates/footer.php'; ?>
+  </div>
 
-  <!-- Modal -->
+
   <?php require_once './templates/inventoryModal.php'; ?>
 
 
-  <?php require_once './templates/footer.php'; ?>
+
 </body>
 
 </html>

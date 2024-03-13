@@ -43,7 +43,8 @@ function storeStock($conn, $stockItem)
   }
 }
 
-function getStock($conn){
+function getStock($conn)
+{
   $clothes = [];
 
   $sql = "SELECT c.*, co.color AS color_name, t.type_name AS type_name
@@ -60,15 +61,37 @@ function getStock($conn){
 
   return $clothes;
 }
-function deleteStock($conn, $id){
+function deleteStock($conn, $id)
+{
 
   $sql = "DELETE FROM clothes WHERE id=$id";
 
   return mysqli_query($conn, $sql);
-
- 
 }
 
-function updateStock($conn, $stockItem){
-  var_dump('update');
+function updateStock($conn, $stockItem)
+{
+  // Escapar valores para evitar injeção de SQL
+  $updates = [];
+  foreach ($stockItem as $coluna => $novoValor) {
+    $coluna = mysqli_real_escape_string($conn, $coluna);
+    $novoValor = mysqli_real_escape_string($conn, $novoValor);
+    $updates[] = "$coluna = '$novoValor'";
+  }
+
+  $setClause = implode(", ", $updates);
+
+  // Escapar a condição para evitar injeção de SQL
+  $condicao = mysqli_real_escape_string($conn, "id = " . $stockItem['id']);
+
+  // Montar a query de atualização
+  $query = "UPDATE clothes SET $setClause WHERE $condicao";
+
+
+  // Executar a query
+  if (mysqli_query($conn, $query)) {
+    echo "Dados atualizados com sucesso.";
+  } else {
+    echo "Erro ao atualizar dados: " . mysqli_error($conn);
+  }
 }
